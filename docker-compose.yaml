@@ -8,9 +8,9 @@ services:
     volumes:
       - ./models:/models
     command: >
-      -m /models/gemma-4-E4B-it-Q8_0.gguf
-      --alias gemma-4-e4b
-      --ctx-size 16384
+      -m /models/Qwen3.5-9B-Q8_0.gguf
+      --alias qwen3-5-9b
+      --ctx-size 32768
       --n-gpu-layers 999
       --port 9931
       --jinja
