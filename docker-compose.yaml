@@ -7,13 +7,28 @@ services:
       - "9931:9931"
     volumes:
       - ./models:/models
-    command: >
-      -m /models/Qwen3.5-9B-Q8_0.gguf
-      --alias qwen3-5-9b
-      --ctx-size 32768
-      --n-gpu-layers 999
-      --port 9931
-      --jinja
+    command:
+      - "-m"
+      - "/models/Qwen3.8-27B-YMQ-M.gguf"
+      - "--alias"
+      - "qwen3-8-27b"
+      - "--ctx-size"
+      - "131072"
+      - "--cache-type-k"
+      - "q8_0"
+      - "--cache-type-v"
+      - "q8_0"
+      - "--spec-type"
+      - "draft-mtp"
+      - "--spec-draft-n-max"
+      - "3"
+      - "--flash-attn"
+      - "on"
+      - "--chat-template-kwargs"
+      - '{"enable_thinking":false}'
+      - "--port"
+      - "9931"
+      - "--jinja"
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:9931/health"]
       interval: 30s
