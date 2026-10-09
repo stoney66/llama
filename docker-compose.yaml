@@ -9,23 +9,24 @@ services:
       - ./models:/models
     command:
       - "-m"
-      - "/models/Qwen3.8-27B-YMQ-M.gguf"
+      - "/models/Qwen3.5-9B-Q8_0.gguf"
       - "--alias"
-      - "qwen3-8-27b"
+      - "qwen3-5-9b"
       - "--ctx-size"
-      - "131072"
+      - "65535"
       - "--cache-type-k"
       - "q8_0"
       - "--cache-type-v"
       - "q8_0"
       - "--spec-type"
-      - "draft-mtp"
-      - "--spec-draft-n-max"
-      - "3"
+      - "none"
+    #  - "--spec-draft-n-max"
+    #  - "3"
       - "--flash-attn"
       - "on"
-      - "--chat-template-kwargs"
-      - '{"enable_thinking":false}'
+      - "--reasoning"
+      - "off"
+      - "--no-reasoning-preserve"
       - "--port"
       - "9931"
       - "--jinja"
@@ -40,5 +41,6 @@ services:
         reservations:
           devices:
             - driver: nvidia
-              count: all
+              device_ids: ["0"]
+#              count: all
               capabilities: [gpu]
